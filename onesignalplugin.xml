@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.0" type="plugin" group="content">
+    <name>OneSignal Plugin</name>
+    <creationDate>May 2020</creationDate>
+    <author>Lennart Martens</author>
+    <authorEmail>lennart@bclandegem.be</authorEmail>
+    <authorUrl>https://www.bclandegem.be</authorUrl>
+    <copyright>Copyright (C) 2020. All rights reserved.</copyright>
+    <license>MIT License; see LICENSE</license>
+    <version>1.0</version>
+    <description>OneSignal notification plugin. This will send a notification when a new article is published</description>
+    <files>
+        <filename plugin="onesignalplugin">onesignalplugin.php</filename>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="oneSignalAppId" type="text" description="Go to https://app.onesignal.com -> Settings -> Keys and Ids" label="OneSignal App Id" />
+                <field name="oneSignalRestKey" type="text" description="Go to https://app.onesignal.com -> Settings -> Keys and Ids" label="OneSignal REST Key" />
+                <field name="categories" type="category" multiple="1" extension="com_content" label="Select a category" description="New articles from these categories will trigger a notification. If no categorie is selected: all categories are included" />
+                <field name="featured" type="radio" label="Only featured articles?" description="" default="1">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+                <field name="messageTitle" type="text" description="If empty, 'New article'" label="Message title" />
+                <field name="language" type="text" description="If empty, 'en'" label="Language" />
+                <field name="segments" type="text" description="If empty, 'Subscribed Users'. Otherwise, a comma separated list is accepted" label="Segments" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>
