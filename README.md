@@ -5,7 +5,7 @@ Powered by OneSignal and Joomla!
 
 ## Installation
 
-Install the zip file in 'Releases'
+Install the zip file: https://github.com/LennartMart/OneSignal-Joomla-Plugin/archive/master.zip
 
 ## Documentation
 
