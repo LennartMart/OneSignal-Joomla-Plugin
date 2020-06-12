@@ -19,15 +19,15 @@ class plgContentOneSignalPlugin extends JPlugin
     public function onContentAfterSave($context, $article, $isNew)
     {
         // Only when creating a new article
-		Log::add('OneSignal Plugin activated', Log::INFO, 'onesignal-plugin');
+	Log::add('OneSignal Plugin activated', Log::INFO, 'onesignal-plugin');
         if (isset($context) && ( $context == "com_content.article" || $context == "com_content.form") && $isNew) {
-			Log::add('New article detected', Log::INFO, 'onesignal-plugin');
+	    Log::add('New article detected', Log::INFO, 'onesignal-plugin');
             $categories = $this->params->get('categories', '');
             $featured = $this->params->get('featured', 1);
             if ($article->featured >= $featured && ($categories == '' || (isset($article->catid) && in_array($article->catid, $categories)))) {
-				Log::add('Notification will be generated', Log::INFO, 'onesignal-plugin');
+		Log::add('Notification will be generated', Log::INFO, 'onesignal-plugin');
                 $this->sendPushNotification($article->title, $this->getLinkToArticle($article));
-				Log::add('Notification generated', Log::INFO, 'onesignal-plugin');
+		Log::add('Notification generated', Log::INFO, 'onesignal-plugin');
             }
         }
     }
