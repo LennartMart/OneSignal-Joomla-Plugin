@@ -8,6 +8,8 @@
  */
 
 defined('_JEXEC') or die;
+// Import lib
+use Joomla\CMS\Log\Log;
 
 /**
  * Plugin push notifications to OneSignal
@@ -17,11 +19,15 @@ class plgContentOneSignalPlugin extends JPlugin
     public function onContentAfterSave($context, $article, $isNew)
     {
         // Only when creating a new article
-        if (isset($context) && $context == "com_content.article" && $isNew) {
+		Log::add('OneSignal Plugin activated', Log::INFO, 'onesignal-plugin');
+        if (isset($context) && ( $context == "com_content.article" || $context == "com_content.form") && $isNew) {
+			Log::add('New article detected', Log::INFO, 'onesignal-plugin');
             $categories = $this->params->get('categories', '');
             $featured = $this->params->get('featured', 1);
             if ($article->featured >= $featured && ($categories == '' || (isset($article->catid) && in_array($article->catid, $categories)))) {
+				Log::add('Notification will be generated', Log::INFO, 'onesignal-plugin');
                 $this->sendPushNotification($article->title, $this->getLinkToArticle($article));
+				Log::add('Notification generated', Log::INFO, 'onesignal-plugin');
             }
         }
     }
@@ -54,8 +60,10 @@ class plgContentOneSignalPlugin extends JPlugin
                 'content' => json_encode($data)
             )
         );
+		
         $context  = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
+		
         return $result;
     }
     private function getLinkToArticle($article)
